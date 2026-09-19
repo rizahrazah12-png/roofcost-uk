@@ -1,0 +1,17 @@
+node_modules
+.vercel
+.output
+dist
+.wrangler
+.nitro
+.tanstack
+.env
+.env.*
+!.env.example
+screenshots
+artifacts
+*.log
+.grok
+.project_id
+.DS_Store
+roofcost-uk-source.zip
