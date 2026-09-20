@@ -2,22 +2,10 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
-import { Button } from "@/components/ui/button";
-import { isPartnerActive } from "@/config/partner";
 import { navItems } from "@/config/site";
-import { requestQuoteForm, QUOTES_SECTION_ID } from "@/lib/quoteIntent";
 
 export function Header() {
   const [open, setOpen] = useState(false);
-  const partner = isPartnerActive();
-
-  function onQuoteClick(e: { preventDefault: () => void }) {
-    if (typeof document !== "undefined" && document.getElementById(QUOTES_SECTION_ID)) {
-      e.preventDefault();
-      requestQuoteForm();
-    }
-    setOpen(false);
-  }
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur-sm">
@@ -46,18 +34,6 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-2">
-          {partner ? (
-            <Button asChild size="sm" className="hidden sm:inline-flex">
-              <Link
-                to="/new-roof-cost"
-                hash="quotes"
-                className="no-underline text-primary-fg"
-                onClick={onQuoteClick}
-              >
-                Compare Roofing Quotes
-              </Link>
-            </Button>
-          ) : null}
           <button
             type="button"
             className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-md border border-border bg-surface lg:hidden"
@@ -89,18 +65,6 @@ export function Header() {
                 </Link>
               </li>
             ))}
-            {partner ? (
-              <li>
-                <Link
-                  to="/new-roof-cost"
-                  hash="quotes"
-                  className="block rounded-md bg-primary px-3 py-3 text-center font-semibold text-primary-fg no-underline"
-                  onClick={onQuoteClick}
-                >
-                  Compare Roofing Quotes
-                </Link>
-              </li>
-            ) : null}
           </ul>
         </nav>
       ) : null}

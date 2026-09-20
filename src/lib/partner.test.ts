@@ -57,6 +57,17 @@ test("new-roof-cost has both intent paths targeting one quote section", () => {
   assert.equal((src.match(/<PartnerLeadForm/g) || []).length, 1);
 });
 
+test("header does not carry a global pitched-replacement quote CTA", () => {
+  const src = readFileSync(
+    fileURLToPath(new URL("../components/Header.tsx", import.meta.url)),
+    "utf8",
+  );
+  assert.doesNotMatch(src, /Compare Roofing Quotes/);
+  assert.doesNotMatch(src, /QuoteCtaButton/);
+  assert.doesNotMatch(src, /PartnerLeadForm/);
+  assert.doesNotMatch(src, /requestQuoteForm/);
+});
+
 test("sitemap and robots use the production origin and stay indexable", () => {
   assert.equal(DEFAULT_PUBLIC_ORIGIN, "https://roofcost-uk.pages.dev");
   const xml = renderSitemapXml(DEFAULT_PUBLIC_ORIGIN);
