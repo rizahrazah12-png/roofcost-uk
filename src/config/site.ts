@@ -63,7 +63,7 @@ export const siteConfig = {
   language: "en-GB",
   lastReviewed: "19 September 2026",
   lastReviewedIso: "2026-09-19",
-  googleSiteVerification: "",
+  googleSiteVerification: "aoclT7NSKo_e0kweb6GEl49EPifxXC6I3WHSESrOy5A",
   contactEmail: "",
   contactName: "RoofCost UK",
   twitterHandle: "",
