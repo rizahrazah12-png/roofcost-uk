@@ -2,6 +2,7 @@ import { Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { PartnerLeadForm } from "@/components/PartnerLeadForm";
 import { Button } from "@/components/ui/button";
+import { isPitchedReplacementQuoteEligible } from "@/config/partner";
 import { publicMethodology } from "@/config/pricingData";
 import {
   emptyInput,
@@ -131,6 +132,10 @@ export function Calculator() {
 
   return (
     <div className="rounded-lg border border-border bg-surface p-4 shadow-sm sm:p-6">
+      {step < 5 ? (
+        <p className="mb-4 text-sm text-muted">No contact details required to see your estimate.</p>
+      ) : null}
+
       <div className="mb-6" aria-hidden={step === 5}>
         <p className="text-sm text-muted">
           Step {Math.min(step + 1, 5)} of 5
@@ -377,7 +382,13 @@ export function Calculator() {
             </p>
           ) : null}
 
-          <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-muted">
+          {isPitchedReplacementQuoteEligible(input.project) ? (
+            <div className="mt-6">
+              <PartnerLeadForm placement="result" />
+            </div>
+          ) : null}
+
+          <ul className="mt-6 list-disc space-y-1 pl-5 text-sm text-muted">
             {estimate.notes.map((n) => (
               <li key={n}>{n}</li>
             ))}
@@ -407,12 +418,6 @@ export function Calculator() {
                 ))}
               </ul>
             </div>
-          </div>
-
-          <div className="mt-8">
-            {input.project === "replacement" ? (
-              <PartnerLeadForm placement="result" />
-            ) : null}
           </div>
 
           <p className="mt-6 text-sm">
