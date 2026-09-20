@@ -5,6 +5,8 @@
  * replace Leads Do Work without hunting through components.
  * Do not load third-party scripts until status is active AND the visitor
  * has chosen to open the quote form.
+ *
+ * Approved product: pitched roof replacement only.
  */
 export type PartnerStatus = "pending" | "active" | "disabled";
 
@@ -27,10 +29,10 @@ export const partnerConfig = {
   /** Optional hosted-form URL for a future partner that does not use a widget. */
   partnerTrackingUrl: "",
   /**
-   * Privacy notice linked from the widget HTML for this configuration.
-   * local-quotes.co.uk is the UK brand presented inside the approved form.
+   * Official partner privacy URL only. Leave empty rather than inventing one;
+   * the form itself presents its own notice.
    */
-  partnerPrivacyUrl: "https://www.local-quotes.co.uk/advice/privacy-policy/?sqn=9221",
+  partnerPrivacyUrl: "",
   partnerTermsUrl: "",
   /**
    * When true AND status is active, the widget may load on high-intent
@@ -51,4 +53,12 @@ export function isPartnerActive(): boolean {
 
 export function showPartnerComingSoon(): boolean {
   return partnerConfig.partnerStatus === "pending";
+}
+
+/**
+ * The approved widget is pitched roof replacement.
+ * Never show it after repair, flat-roof replacement, or “not sure”.
+ */
+export function isPitchedReplacementQuoteEligible(project: string): boolean {
+  return isPartnerActive() && project === "replacement";
 }
