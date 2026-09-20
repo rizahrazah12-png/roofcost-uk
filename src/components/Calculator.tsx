@@ -132,7 +132,9 @@ export function Calculator() {
   return (
     <div className="rounded-lg border border-border bg-surface p-4 shadow-sm sm:p-6">
       <div className="mb-6" aria-hidden={step === 5}>
-        <p className="text-sm text-muted">Step {Math.min(step + 1, 5)} of 5</p>
+        <p className="text-sm text-muted">
+          Step {Math.min(step + 1, 5)} of 5
+        </p>
         <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-border">
           <div
             className="h-full bg-primary transition-[width] duration-200"
@@ -408,21 +410,31 @@ export function Calculator() {
           </div>
 
           <div className="mt-8">
-            <PartnerLeadForm placement="result" />
+            {input.project === "replacement" ? (
+              <PartnerLeadForm placement="result" />
+            ) : null}
           </div>
 
           <p className="mt-6 text-sm">
             Learn more:{" "}
-            <Link to="/new-roof-cost" className="underline">new roof costs</Link>
+            <Link to="/new-roof-cost" className="underline">
+              new roof costs
+            </Link>
             {", "}
-            <Link to="/roof-repair-cost" className="underline">repair costs</Link>
+            <Link to="/roof-repair-cost" className="underline">
+              repair costs
+            </Link>
             {" and "}
-            <Link to="/flat-roof-cost" className="underline">flat-roof costs</Link>
+            <Link to="/flat-roof-cost" className="underline">
+              flat-roof costs
+            </Link>
             .
           </p>
 
           <section className="mt-8 border-t border-border pt-6" aria-labelledby="how-est">
-            <h3 id="how-est" className="font-display text-lg font-semibold">How we estimate costs</h3>
+            <h3 id="how-est" className="font-display text-lg font-semibold">
+              How we estimate costs
+            </h3>
             <p className="mt-2 text-sm text-muted">{publicMethodology.headline}</p>
             <ul className="mt-2 list-disc space-y-1 pl-5 text-sm text-muted">
               {publicMethodology.bullets.map((b) => (
@@ -435,14 +447,24 @@ export function Calculator() {
 
       <div className="mt-8 flex flex-wrap gap-3">
         {step > 0 ? (
-          <Button type="button" variant="secondary" onClick={goBack}>Back</Button>
+          <Button type="button" variant="secondary" onClick={goBack}>
+            Back
+          </Button>
         ) : null}
         {step < 5 ? (
           <Button type="button" onClick={goNext}>
             {step === 4 ? "See planning range" : "Continue"}
           </Button>
         ) : (
-          <Button type="button" variant="secondary" onClick={() => setStep(0)}>Start again</Button>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={() => {
+              setStep(0);
+            }}
+          >
+            Start again
+          </Button>
         )}
       </div>
     </div>

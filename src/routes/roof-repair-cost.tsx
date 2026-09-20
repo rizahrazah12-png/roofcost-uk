@@ -2,7 +2,6 @@ import { Link, createFileRoute } from "@tanstack/react-router";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
 import { CalculatorTeaser } from "@/components/CalculatorTeaser";
 import { JsonLd } from "@/components/JsonLd";
-import { PartnerLeadForm } from "@/components/PartnerLeadForm";
 import { SourcesBlock } from "@/components/SourcesBlock";
 import { LAST_REVIEWED_LABEL } from "@/config/pricingData";
 import { pageHead } from "@/lib/seo";
@@ -45,14 +44,17 @@ function RepairPage() {
         average. A slipped tile on a bungalow is a different job from a leaking
         valley on a three-storey terrace.
       </p>
+
       <div className="mt-8">
         <CalculatorTeaser title="Estimate a repair range" />
       </div>
+
       <div className="mt-8 rounded-lg border border-border bg-warn-bg p-4 text-sm text-fg">
         Working at height is dangerous. This page does not give DIY roofing
         instructions. If there is structural damage, unsafe access, or water
         entering the house, arrange a professional assessment.
       </div>
+
       <h2 className="mt-12 font-display text-2xl font-semibold">When a professional inspection matters</h2>
       <p className="mt-3">
         Use a competent roofing professional if you can see sagging, missing
@@ -60,10 +62,13 @@ function RepairPage() {
         whether the structure is sound. A website cannot diagnose that. Do not
         climb the roof to “have a look”.
       </p>
+
       <h2 className="mt-12 font-display text-2xl font-semibold">Typical repair bands</h2>
       <div className="mt-4 overflow-x-auto">
         <table className="w-full min-w-[28rem] border-collapse text-sm">
-          <caption className="mb-2 text-left text-muted">Planning ranges for common domestic repairs (access extra)</caption>
+          <caption className="mb-2 text-left text-muted">
+            Planning ranges for common domestic repairs (access extra)
+          </caption>
           <thead>
             <tr className="border-b border-border text-left">
               <th className="py-2 pr-3 font-semibold">Job</th>
@@ -93,21 +98,60 @@ function RepairPage() {
         without access equipment. Homeowner invoices usually look higher once
         those are added.
       </p>
+
       <h2 className="mt-12 font-display text-2xl font-semibold">What the job actually is</h2>
       <h3 className="mt-6 font-display text-xl font-semibold">Minor or localised work</h3>
-      <p className="mt-2">A small number of cracked or slipped tiles, a short mortar failure, or an obvious puncture. Cost is dominated by getting a competent person onto the roof safely, not by the price of one tile.</p>
+      <p className="mt-2">
+        A small number of cracked or slipped tiles, a short mortar failure, or
+        an obvious puncture. Cost is dominated by getting a competent person
+        onto the roof safely, not by the price of one tile.
+      </p>
       <h3 className="mt-6 font-display text-xl font-semibold">Tile or slate replacement</h3>
-      <p className="mt-2">Matching older coverings can take time. Reclaimed or heritage pieces cost more than a standard concrete interlocking tile.</p>
+      <p className="mt-2">
+        Matching older coverings can take time. Reclaimed or heritage pieces
+        cost more than a standard concrete interlocking tile.
+      </p>
       <h3 className="mt-6 font-display text-xl font-semibold">Flashing and valleys</h3>
-      <p className="mt-2">Water often enters where the roof meets a chimney, wall or valley, not through the middle of a slope. Lead work is skilled and is priced by the detail, not by a single “leak fee”.</p>
+      <p className="mt-2">
+        Water often enters where the roof meets a chimney, wall or valley, not
+        through the middle of a slope. Lead work is skilled and is priced by
+        the detail, not by a single “leak fee”.
+      </p>
       <h3 className="mt-6 font-display text-xl font-semibold">Leak investigation</h3>
-      <p className="mt-2">Staining on a ceiling does not always sit under the hole. A roofer may need to inspect from inside and outside before quoting a lasting fix. Temporary weatherproofing is not the same as a completed repair.</p>
+      <p className="mt-2">
+        Staining on a ceiling does not always sit under the hole. A roofer may
+        need to inspect from inside and outside before quoting a lasting fix.
+        Temporary weatherproofing is not the same as a completed repair.
+      </p>
       <h3 className="mt-6 font-display text-xl font-semibold">Larger damaged sections</h3>
-      <p className="mt-2">Once underlay, battens or a whole slope are failing, quotes start to resemble a partial re-roof. At that point, compare the repair with a <Link to="/new-roof-cost" className="underline">full replacement</Link>.</p>
+      <p className="mt-2">
+        Once underlay, battens or a whole slope are failing, quotes start to
+        resemble a partial re-roof. At that point, compare the repair with a{" "}
+        <Link to="/new-roof-cost" className="underline">
+          full replacement
+        </Link>
+        .
+      </p>
+
       <h2 className="mt-12 font-display text-2xl font-semibold">Scaffolding</h2>
-      <p className="mt-3">Many two-storey repairs need more than a ladder. Scaffold or tower hire can run from a few hundred pounds to over £2,000 depending on the elevation. If two quotes differ wildly, check whether access is included.</p>
-      <p className="mt-8">For membranes rather than tiles, see <Link to="/flat-roof-cost" className="underline">flat roof costs</Link>. To turn the details of your job into a planning band, use the <Link to="/roof-cost-calculator" className="underline">roof cost calculator</Link>.</p>
-      <div className="mt-10"><PartnerLeadForm placement="guide" /></div>
+      <p className="mt-3">
+        Many two-storey repairs need more than a ladder. Scaffold or tower hire
+        can run from a few hundred pounds to over £2,000 depending on the
+        elevation. If two quotes differ wildly, check whether access is included.
+      </p>
+
+      <p className="mt-8">
+        For membranes rather than tiles, see{" "}
+        <Link to="/flat-roof-cost" className="underline">
+          flat roof costs
+        </Link>
+        . To turn the details of your job into a planning band, use the{" "}
+        <Link to="/roof-cost-calculator" className="underline">
+          roof cost calculator
+        </Link>
+        .
+      </p>
+
       <SourcesBlock />
     </main>
   );

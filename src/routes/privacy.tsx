@@ -63,21 +63,40 @@ function PrivacyPage() {
 
       <h2 className="mt-10 font-display text-2xl font-semibold">Quote-comparison partners</h2>
       {partnerOn ? (
-        <p className="mt-3">
-          If you submit a quote request through a partner form, that partner is
-          the controller of the personal data you type into their form. Their
-          own privacy notice applies.
-          {partnerConfig.partnerPrivacyUrl ? (
-            <>
-              {" "}
-              Read it here:{" "}
-              <a href={partnerConfig.partnerPrivacyUrl} className="underline">
-                partner privacy information
-              </a>
-              .
-            </>
-          ) : null}
-        </p>
+        <>
+          <p className="mt-3">
+            The RoofCost UK calculator itself does not require your name, email
+            address or telephone number. The planning range is produced in your
+            browser from the job details you enter.
+          </p>
+          <p className="mt-3">
+            The quote comparison form is supplied by {partnerConfig.partnerName}.
+            Personal information you type into that partner form is transmitted
+            directly to {partnerConfig.partnerName} so they can handle the quote
+            request. RoofCost UK may receive a commission for qualifying
+            enquiries. This does not increase the price you pay.
+          </p>
+          <p className="mt-3">
+            Please read the privacy information presented by{" "}
+            {partnerConfig.partnerName} within or alongside the form before you
+            submit personal details.
+            {partnerConfig.partnerPrivacyUrl ? (
+              <>
+                {" "}
+                Their privacy notice is also linked here:{" "}
+                <a
+                  href={partnerConfig.partnerPrivacyUrl}
+                  className="underline"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {partnerConfig.partnerName} privacy information
+                </a>
+                .
+              </>
+            ) : null}
+          </p>
+        </>
       ) : (
         <p className="mt-3">
           No partner quote form is active on this site at present, so RoofCost
