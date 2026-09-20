@@ -47,6 +47,17 @@
     outline-offset: 2px;
   }
   a { color: var(--color-primary-dark); }
+
+  #quotes {
+    scroll-margin-top: 5.5rem;
+  }
+
+  .partner-widget-mount,
+  .partner-widget-mount iframe,
+  .partner-widget-mount img,
+  .partner-widget-mount table {
+    max-width: 100%;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

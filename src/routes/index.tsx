@@ -64,7 +64,7 @@ function Home() {
           {[
             { n: "1", t: "Tell us about the roof", d: "Job type, property, covering and whether scaffolding is likely." },
             { n: "2", t: "Get an indicative cost range", d: "A rounded planning band, not a single made-up figure." },
-            { n: "3", t: "Optionally compare roofing quotes", d: "Quote comparison is not active yet. When a partner is approved, this optional step will appear after your estimate — never before." },
+            { n: "3", t: "Optionally compare roofing quotes", d: "After a full pitched-roof replacement estimate you can request property-specific quotes. A click is not a lead, and quotes do not change the calculator range." },
           ].map((s) => (
             <li key={s.n} className="rounded-lg border border-border bg-surface p-5">
               <p className="text-sm font-semibold text-primary-dark">Step {s.n}</p>

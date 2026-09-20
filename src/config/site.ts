@@ -13,6 +13,9 @@ function hostOnly(raw: string): string {
   return stripOrigin(raw).split(":")[0] ?? "";
 }
 
+/** Cloudflare Pages production origin when VITE_PUBLIC_SITE_URL is unset at build. */
+export const DEFAULT_PUBLIC_ORIGIN = "https://roofcost-uk.pages.dev";
+
 /** Public HTTPS origin, or "" if the value is not a publishable host. */
 export function toPublicHttpsOrigin(raw: string): string {
   const host = hostOnly(raw);
@@ -38,7 +41,7 @@ function readEnvSiteUrl(): string {
     typeof process !== "undefined"
       ? String(process.env.VITE_PUBLIC_SITE_URL ?? process.env.PUBLIC_SITE_URL ?? "")
       : "";
-  return toPublicHttpsOrigin(vite) || toPublicHttpsOrigin(node);
+  return toPublicHttpsOrigin(vite) || toPublicHttpsOrigin(node) || DEFAULT_PUBLIC_ORIGIN;
 }
 
 export function originFromRequest(request?: Request | null): string {
@@ -61,8 +64,8 @@ export const siteConfig = {
   },
   locale: "en-GB",
   language: "en-GB",
-  lastReviewed: "19 September 2026",
-  lastReviewedIso: "2026-09-19",
+  lastReviewed: "20 September 2026",
+  lastReviewedIso: "2026-09-20",
   googleSiteVerification: "aoclT7NSKo_e0kweb6GEl49EPifxXC6I3WHSESrOy5A",
   contactEmail: "",
   contactName: "RoofCost UK",
@@ -84,6 +87,15 @@ export const legalItems = [
   { label: "Affiliate disclosure", to: "/affiliate-disclosure" as const },
 ] as const;
 
+/**
+ * Published indexable routes. Add a path here only when the matching
+ * `src/routes/*.tsx` page is a complete article — never as an empty slug.
+ *
+ * Later high-quality guides (do not create until written in full):
+ * pitched-roof-replacement-cost, slate-roof-replacement-cost,
+ * concrete-tile-roof-cost, semi-detached-roof-replacement-cost,
+ * terraced-house-roof-replacement-cost, bungalow-roof-replacement-cost.
+ */
 export const publicPages: { path: string; changefreq: string; priority: string }[] = [
   { path: "/", changefreq: "weekly", priority: "1.0" },
   { path: "/roof-cost-calculator", changefreq: "weekly", priority: "0.9" },

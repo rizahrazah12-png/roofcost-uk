@@ -2,7 +2,9 @@
 
 Independent UK roofing cost information and a free planning-range calculator for homeowners. Not a contractor.
 
-Partner status in code: **pending**. Do not claim a live quote partnership until an approved embed is in `src/config/partner.ts`.
+Partner status in code: **active** (Leads Do Work, pitched roof replacement widget). The widget script loads only after a visitor clicks **Compare Roofing Quotes**. A click is not a lead.
+
+The approved widget is pitched roof replacement only. It is shown after a calculator result when `project === "replacement"`, and on `/new-roof-cost`. It is not shown for repair, flat-roof replacement, or “not sure”.
 
 ## Run locally
 
@@ -39,16 +41,16 @@ After the first deploy, set `VITE_PUBLIC_SITE_URL` to the live HTTPS origin and 
 5. Click every route: `/`, calculator, three guides, about, contact, privacy, terms, affiliate disclosure.
 6. Add the Search Console HTML verification token to `src/config/site.ts` → `googleSiteVerification` after go-live.
 7. Submit `/sitemap.xml` in Search Console.
-8. Apply to the CPL partner (intended first partner: Leads Do Work) using the live HTTPS URL. Do not activate partner code first.
+8. Partner quote form is live for pitched roof replacement only. Do not invent additional widget IDs.
 
-## AFTER LEADS DO WORK APPROVAL
+## AFTER WIDGET CHANGES
 
-1. Change `partnerStatus` to `"active"` in `src/config/partner.ts`.
-2. Insert **only** the approved embed, widget or tracking URL. Do not invent code.
-3. Add `partnerPrivacyUrl` / `partnerTermsUrl`.
-4. Set `partnerScriptEnabled` to `true`.
-5. Confirm the commission disclosure still shows next to the form.
-6. Update `/privacy` if the partner processes personal data (the page already switches copy when status is active).
+1. Keep `partnerStatus` as `"active"` only while the approved embed is in `src/config/partner.ts`.
+2. Insert **only** an approved embed, widget or tracking URL. Do not invent code.
+3. Add `partnerPrivacyUrl` / `partnerTermsUrl` only when the partner supplies them.
+4. Keep `partnerScriptEnabled` true only while the widget should load after a click.
+5. Confirm the commission disclosure still shows before personal details.
+6. Keep `/privacy` accurate if the partner processes personal data.
 7. Test the live form end-to-end. A button click is not a lead.
 8. Only treat `lead_submitted` as a lead if the partner provides a real completion callback.
 

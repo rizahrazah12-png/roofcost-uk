@@ -65,20 +65,29 @@ function PrivacyPage() {
       {partnerOn ? (
         <>
           <p className="mt-3">
-            The RoofCost UK calculator itself does not require your name, email
-            address or telephone number. The planning range is produced in your
-            browser from the job details you enter.
+            RoofCost UK calculator data and partner quote-request data are
+            handled separately.
           </p>
           <p className="mt-3">
-            The quote comparison form is supplied by {partnerConfig.partnerName}.
-            Personal information you type into that partner form is transmitted
-            directly to {partnerConfig.partnerName} so they can handle the quote
-            request. RoofCost UK may receive a commission for qualifying
-            enquiries. This does not increase the price you pay.
+            The calculator runs in your browser. The answers you enter there
+            (job type, property, covering, area and similar details) are used
+            only to show an on-screen planning range. RoofCost UK does not
+            require your name, email, telephone number or postcode to produce
+            that estimate, and those calculator answers are not sent to{" "}
+            {partnerConfig.partnerName} unless you later choose to complete
+            their form.
+          </p>
+          <p className="mt-3">
+            The quote request form is supplied by {partnerConfig.partnerName}.
+            Personal information you type into that form is transmitted
+            directly to {partnerConfig.partnerName} so they can handle the
+            enquiry. RoofCost UK may receive a commission for qualifying
+            enquiries. This does not increase the price you pay. Requesting
+            quotes does not change the calculator estimate.
           </p>
           <p className="mt-3">
             Please read the privacy information presented by{" "}
-            {partnerConfig.partnerName} within or alongside the form before you
+            {partnerConfig.partnerName} in or next to the form before you
             submit personal details.
             {partnerConfig.partnerPrivacyUrl ? (
               <>

@@ -1,8 +1,9 @@
+import { Button } from "@/components/ui/button";
 import { isPartnerActive, partnerConfig, showPartnerComingSoon } from "@/config/partner";
 import { track } from "@/lib/events";
 import { loadPartnerWidget } from "@/lib/partnerWidget";
 import { OPEN_QUOTES_EVENT, QUOTES_SECTION_ID, requestQuoteForm } from "@/lib/quoteIntent";
-import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 
 type LoadState = "idle" | "loading" | "ready" | "error";
@@ -175,7 +176,7 @@ export function QuoteCtaButton({
 }) {
   if (!isPartnerActive()) return null;
   return (
-    <Button type="button" variant={variant} className={className} onClick={() => requestQuoteForm()}>
+    <Button type="button" variant={variant} className={cn("min-h-12", className)} onClick={() => requestQuoteForm()}>
       Compare Roofing Quotes
     </Button>
   );

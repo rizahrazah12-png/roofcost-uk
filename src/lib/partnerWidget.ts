@@ -32,10 +32,11 @@ export function loadPartnerWidget(mount: HTMLElement): Promise<void> {
 
   const w = window as PartnerWindow;
   w.id_conf = configId;
-  ensureShell(mount);
+  removeOrphanShell(mount);
 
   const existing = document.querySelector(`script[${SCRIPT_FLAG}]`);
   if (existing && typeof w.startTheLoading === "function") {
+    ensureReloadShell(mount);
     w.startTheLoading();
     return waitForWidget(mount);
   }
@@ -46,16 +47,19 @@ export function loadPartnerWidget(mount: HTMLElement): Promise<void> {
   return scriptLoad.then(() => waitForWidget(mount));
 }
 
-function ensureShell(mount: HTMLElement) {
-  if (!mount.querySelector("#f-content")) {
-    const content = document.createElement("div");
-    content.id = "f-content";
-    mount.appendChild(content);
-  }
+function removeOrphanShell(mount: HTMLElement) {
   const orphan = document.getElementById("f-content");
-  if (orphan && !mount.contains(orphan) && orphan !== mount.querySelector("#f-content")) {
-    orphan.remove();
-  }
+  if (orphan && !mount.contains(orphan)) orphan.remove();
+}
+
+/** Used only when the vendor script is already on the page and document.write will not run again. */
+function ensureReloadShell(mount: HTMLElement) {
+  if (mount.querySelector("#f-content")) return;
+  const content = document.createElement("div");
+  content.id = "f-content";
+  content.innerHTML =
+    '<div id="Qtop-section"></div><div id="f-loader"></div><div id="Qmain-section"></div><div id="Qfooter-section"></div>';
+  mount.appendChild(content);
 }
 
 function injectVendorScript(mount: HTMLElement, scriptUrl: string): Promise<void> {
@@ -106,11 +110,25 @@ function patchDocumentWrite(mount: HTMLElement): () => void {
   };
 }
 
+function isPartnerFormVisible(mount: HTMLElement): boolean {
+  if (
+    mount.querySelector(
+      "#Qmain-section iframe, #Qmain-section form, #Qmain-section input, #Qmain-section select, #Qmain-section textarea",
+    )
+  ) {
+    return true;
+  }
+  const section = mount.querySelector("#Qmain-section");
+  if (section && section.childElementCount > 0) return true;
+  if (mount.querySelector("iframe, form, input, select, textarea")) return true;
+  return false;
+}
+
 function waitForWidget(mount: HTMLElement): Promise<void> {
   return new Promise((resolve, reject) => {
     const started = Date.now();
     const tick = () => {
-      if (mount.querySelector("#f-content, #Qmain-section, #f-loader, form, input")) {
+      if (isPartnerFormVisible(mount)) {
         resolve();
         return;
       }

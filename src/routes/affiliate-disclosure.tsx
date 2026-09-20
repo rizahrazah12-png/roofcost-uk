@@ -34,9 +34,11 @@ function AffiliatePage() {
       </p>
       {active ? (
         <p className="mt-3">
-          A quote-request partnership with {partnerConfig.partnerName} is now
-          active. Where that form is shown, a short commission disclosure
-          appears next to it. RoofCost UK does not publish commission amounts.
+          A quote-request partnership with {partnerConfig.partnerName} is active
+          for pitched roof replacement enquiries. Where that form is shown, a
+          short commission disclosure appears before you enter personal
+          details. RoofCost UK does not publish commission amounts. Submitting
+          a quote request does not change the calculator estimate.
         </p>
       ) : (
         <p className="mt-3">

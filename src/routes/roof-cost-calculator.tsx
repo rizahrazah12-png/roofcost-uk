@@ -24,7 +24,7 @@ function CalculatorPage() {
         The result is an indicative planning range, not a contractor quotation.
       </p>
       <p className="mt-2 text-sm text-muted">
-        You do not need to provide personal details to see a range. Read the{" "}
+        No contact details required to see your estimate. Read the{" "}
         <Link to="/new-roof-cost" className="underline">
           new roof
         </Link>

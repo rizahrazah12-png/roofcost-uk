@@ -1,19 +1,21 @@
-import { Link, useRouterState } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { isPartnerActive } from "@/config/partner";
 import { navItems } from "@/config/site";
-import { requestQuoteForm } from "@/lib/quoteIntent";
+import { requestQuoteForm, QUOTES_SECTION_ID } from "@/lib/quoteIntent";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const partner = isPartnerActive();
-  const pathname = useRouterState({ select: (s) => s.location.pathname });
 
-  function onQuoteClick() {
-    if (pathname === "/new-roof-cost") requestQuoteForm();
+  function onQuoteClick(e: { preventDefault: () => void }) {
+    if (typeof document !== "undefined" && document.getElementById(QUOTES_SECTION_ID)) {
+      e.preventDefault();
+      requestQuoteForm();
+    }
     setOpen(false);
   }
 
