@@ -92,16 +92,53 @@ export const legalItems = [
  * `src/routes/*.tsx` page is a complete article — never as an empty slug.
  *
  * Later high-quality guides (do not create until written in full):
- * pitched-roof-replacement-cost, slate-roof-replacement-cost,
- * concrete-tile-roof-cost, semi-detached-roof-replacement-cost,
- * terraced-house-roof-replacement-cost, bungalow-roof-replacement-cost.
+ * pitched-roof-replacement-cost (would cannibalise /new-roof-cost),
+ * city or county pages (wait for Search Console evidence).
  */
+export const replacementClusterPages = [
+  {
+    path: "/roof-replacement-cost-per-m2" as const,
+    label: "Roof replacement cost per m²",
+    description: "What a UK £/m² rate includes — and why floor area × rate is the wrong quote.",
+  },
+  {
+    path: "/semi-detached-roof-replacement-cost" as const,
+    label: "Semi-detached roof replacement costs",
+    description: "Planning ranges for a typical 3-bed semi, including hips, gables and access.",
+  },
+  {
+    path: "/terraced-house-roof-replacement-cost" as const,
+    label: "Terraced house roof replacement costs",
+    description: "Mid-terrace re-roofs, shared boundaries and front-or-rear access.",
+  },
+  {
+    path: "/bungalow-roof-replacement-cost" as const,
+    label: "Bungalow roof replacement costs",
+    description: "Why a single-storey house can still have a large, expensive roof.",
+  },
+  {
+    path: "/concrete-tile-roof-replacement-cost" as const,
+    label: "Concrete tile roof replacement costs",
+    description: "Full concrete-tile re-roofs, not a handful of replacement tiles.",
+  },
+  {
+    path: "/slate-roof-replacement-cost" as const,
+    label: "Slate roof replacement costs",
+    description: "Natural slate re-roofs, labour intensity and why they sit above concrete.",
+  },
+] as const;
+
 export const publicPages: { path: string; changefreq: string; priority: string }[] = [
   { path: "/", changefreq: "weekly", priority: "1.0" },
   { path: "/roof-cost-calculator", changefreq: "weekly", priority: "0.9" },
   { path: "/new-roof-cost", changefreq: "monthly", priority: "0.8" },
   { path: "/roof-repair-cost", changefreq: "monthly", priority: "0.8" },
   { path: "/flat-roof-cost", changefreq: "monthly", priority: "0.8" },
+  ...replacementClusterPages.map((p) => ({
+    path: p.path,
+    changefreq: "monthly",
+    priority: "0.7",
+  })),
   { path: "/about", changefreq: "yearly", priority: "0.4" },
   { path: "/contact", changefreq: "yearly", priority: "0.4" },
   { path: "/privacy", changefreq: "yearly", priority: "0.3" },

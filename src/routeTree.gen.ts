@@ -12,13 +12,19 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AffiliateDisclosureRouteImport } from './routes/affiliate-disclosure'
+import { Route as BungalowRoofReplacementCostRouteImport } from './routes/bungalow-roof-replacement-cost'
+import { Route as ConcreteTileRoofReplacementCostRouteImport } from './routes/concrete-tile-roof-replacement-cost'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as FlatRoofCostRouteImport } from './routes/flat-roof-cost'
 import { Route as NewRoofCostRouteImport } from './routes/new-roof-cost'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as RoofCostCalculatorRouteImport } from './routes/roof-cost-calculator'
 import { Route as RoofRepairCostRouteImport } from './routes/roof-repair-cost'
+import { Route as RoofReplacementCostPerM2RouteImport } from './routes/roof-replacement-cost-per-m2'
+import { Route as SemiDetachedRoofReplacementCostRouteImport } from './routes/semi-detached-roof-replacement-cost'
+import { Route as SlateRoofReplacementCostRouteImport } from './routes/slate-roof-replacement-cost'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as TerracedHouseRoofReplacementCostRouteImport } from './routes/terraced-house-roof-replacement-cost'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -35,6 +41,18 @@ const AffiliateDisclosureRoute = AffiliateDisclosureRouteImport.update({
   path: '/affiliate-disclosure',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BungalowRoofReplacementCostRoute =
+  BungalowRoofReplacementCostRouteImport.update({
+    id: '/bungalow-roof-replacement-cost',
+    path: '/bungalow-roof-replacement-cost',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const ConcreteTileRoofReplacementCostRoute =
+  ConcreteTileRoofReplacementCostRouteImport.update({
+    id: '/concrete-tile-roof-replacement-cost',
+    path: '/concrete-tile-roof-replacement-cost',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -65,48 +83,90 @@ const RoofRepairCostRoute = RoofRepairCostRouteImport.update({
   path: '/roof-repair-cost',
   getParentRoute: () => rootRouteImport,
 } as any)
+const RoofReplacementCostPerM2Route =
+  RoofReplacementCostPerM2RouteImport.update({
+    id: '/roof-replacement-cost-per-m2',
+    path: '/roof-replacement-cost-per-m2',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SemiDetachedRoofReplacementCostRoute =
+  SemiDetachedRoofReplacementCostRouteImport.update({
+    id: '/semi-detached-roof-replacement-cost',
+    path: '/semi-detached-roof-replacement-cost',
+    getParentRoute: () => rootRouteImport,
+  } as any)
+const SlateRoofReplacementCostRoute =
+  SlateRoofReplacementCostRouteImport.update({
+    id: '/slate-roof-replacement-cost',
+    path: '/slate-roof-replacement-cost',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const TerracedHouseRoofReplacementCostRoute =
+  TerracedHouseRoofReplacementCostRouteImport.update({
+    id: '/terraced-house-roof-replacement-cost',
+    path: '/terraced-house-roof-replacement-cost',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/affiliate-disclosure': typeof AffiliateDisclosureRoute
+  '/bungalow-roof-replacement-cost': typeof BungalowRoofReplacementCostRoute
+  '/concrete-tile-roof-replacement-cost': typeof ConcreteTileRoofReplacementCostRoute
   '/contact': typeof ContactRoute
   '/flat-roof-cost': typeof FlatRoofCostRoute
   '/new-roof-cost': typeof NewRoofCostRoute
   '/privacy': typeof PrivacyRoute
   '/roof-cost-calculator': typeof RoofCostCalculatorRoute
   '/roof-repair-cost': typeof RoofRepairCostRoute
+  '/roof-replacement-cost-per-m2': typeof RoofReplacementCostPerM2Route
+  '/semi-detached-roof-replacement-cost': typeof SemiDetachedRoofReplacementCostRoute
+  '/slate-roof-replacement-cost': typeof SlateRoofReplacementCostRoute
   '/terms': typeof TermsRoute
+  '/terraced-house-roof-replacement-cost': typeof TerracedHouseRoofReplacementCostRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/affiliate-disclosure': typeof AffiliateDisclosureRoute
+  '/bungalow-roof-replacement-cost': typeof BungalowRoofReplacementCostRoute
+  '/concrete-tile-roof-replacement-cost': typeof ConcreteTileRoofReplacementCostRoute
   '/contact': typeof ContactRoute
   '/flat-roof-cost': typeof FlatRoofCostRoute
   '/new-roof-cost': typeof NewRoofCostRoute
   '/privacy': typeof PrivacyRoute
   '/roof-cost-calculator': typeof RoofCostCalculatorRoute
   '/roof-repair-cost': typeof RoofRepairCostRoute
+  '/roof-replacement-cost-per-m2': typeof RoofReplacementCostPerM2Route
+  '/semi-detached-roof-replacement-cost': typeof SemiDetachedRoofReplacementCostRoute
+  '/slate-roof-replacement-cost': typeof SlateRoofReplacementCostRoute
   '/terms': typeof TermsRoute
+  '/terraced-house-roof-replacement-cost': typeof TerracedHouseRoofReplacementCostRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/affiliate-disclosure': typeof AffiliateDisclosureRoute
+  '/bungalow-roof-replacement-cost': typeof BungalowRoofReplacementCostRoute
+  '/concrete-tile-roof-replacement-cost': typeof ConcreteTileRoofReplacementCostRoute
   '/contact': typeof ContactRoute
   '/flat-roof-cost': typeof FlatRoofCostRoute
   '/new-roof-cost': typeof NewRoofCostRoute
   '/privacy': typeof PrivacyRoute
   '/roof-cost-calculator': typeof RoofCostCalculatorRoute
   '/roof-repair-cost': typeof RoofRepairCostRoute
+  '/roof-replacement-cost-per-m2': typeof RoofReplacementCostPerM2Route
+  '/semi-detached-roof-replacement-cost': typeof SemiDetachedRoofReplacementCostRoute
+  '/slate-roof-replacement-cost': typeof SlateRoofReplacementCostRoute
   '/terms': typeof TermsRoute
+  '/terraced-house-roof-replacement-cost': typeof TerracedHouseRoofReplacementCostRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -114,50 +174,74 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/affiliate-disclosure'
+    | '/bungalow-roof-replacement-cost'
+    | '/concrete-tile-roof-replacement-cost'
     | '/contact'
     | '/flat-roof-cost'
     | '/new-roof-cost'
     | '/privacy'
     | '/roof-cost-calculator'
     | '/roof-repair-cost'
+    | '/roof-replacement-cost-per-m2'
+    | '/semi-detached-roof-replacement-cost'
+    | '/slate-roof-replacement-cost'
     | '/terms'
+    | '/terraced-house-roof-replacement-cost'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/affiliate-disclosure'
+    | '/bungalow-roof-replacement-cost'
+    | '/concrete-tile-roof-replacement-cost'
     | '/contact'
     | '/flat-roof-cost'
     | '/new-roof-cost'
     | '/privacy'
     | '/roof-cost-calculator'
     | '/roof-repair-cost'
+    | '/roof-replacement-cost-per-m2'
+    | '/semi-detached-roof-replacement-cost'
+    | '/slate-roof-replacement-cost'
     | '/terms'
+    | '/terraced-house-roof-replacement-cost'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/affiliate-disclosure'
+    | '/bungalow-roof-replacement-cost'
+    | '/concrete-tile-roof-replacement-cost'
     | '/contact'
     | '/flat-roof-cost'
     | '/new-roof-cost'
     | '/privacy'
     | '/roof-cost-calculator'
     | '/roof-repair-cost'
+    | '/roof-replacement-cost-per-m2'
+    | '/semi-detached-roof-replacement-cost'
+    | '/slate-roof-replacement-cost'
     | '/terms'
+    | '/terraced-house-roof-replacement-cost'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AffiliateDisclosureRoute: typeof AffiliateDisclosureRoute
+  BungalowRoofReplacementCostRoute: typeof BungalowRoofReplacementCostRoute
+  ConcreteTileRoofReplacementCostRoute: typeof ConcreteTileRoofReplacementCostRoute
   ContactRoute: typeof ContactRoute
   FlatRoofCostRoute: typeof FlatRoofCostRoute
   NewRoofCostRoute: typeof NewRoofCostRoute
   PrivacyRoute: typeof PrivacyRoute
   RoofCostCalculatorRoute: typeof RoofCostCalculatorRoute
   RoofRepairCostRoute: typeof RoofRepairCostRoute
+  RoofReplacementCostPerM2Route: typeof RoofReplacementCostPerM2Route
+  SemiDetachedRoofReplacementCostRoute: typeof SemiDetachedRoofReplacementCostRoute
+  SlateRoofReplacementCostRoute: typeof SlateRoofReplacementCostRoute
   TermsRoute: typeof TermsRoute
+  TerracedHouseRoofReplacementCostRoute: typeof TerracedHouseRoofReplacementCostRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -181,6 +265,20 @@ declare module '@tanstack/react-router' {
       path: '/affiliate-disclosure'
       fullPath: '/affiliate-disclosure'
       preLoaderRoute: typeof AffiliateDisclosureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/bungalow-roof-replacement-cost': {
+      id: '/bungalow-roof-replacement-cost'
+      path: '/bungalow-roof-replacement-cost'
+      fullPath: '/bungalow-roof-replacement-cost'
+      preLoaderRoute: typeof BungalowRoofReplacementCostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/concrete-tile-roof-replacement-cost': {
+      id: '/concrete-tile-roof-replacement-cost'
+      path: '/concrete-tile-roof-replacement-cost'
+      fullPath: '/concrete-tile-roof-replacement-cost'
+      preLoaderRoute: typeof ConcreteTileRoofReplacementCostRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -225,11 +323,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RoofRepairCostRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/roof-replacement-cost-per-m2': {
+      id: '/roof-replacement-cost-per-m2'
+      path: '/roof-replacement-cost-per-m2'
+      fullPath: '/roof-replacement-cost-per-m2'
+      preLoaderRoute: typeof RoofReplacementCostPerM2RouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/semi-detached-roof-replacement-cost': {
+      id: '/semi-detached-roof-replacement-cost'
+      path: '/semi-detached-roof-replacement-cost'
+      fullPath: '/semi-detached-roof-replacement-cost'
+      preLoaderRoute: typeof SemiDetachedRoofReplacementCostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/slate-roof-replacement-cost': {
+      id: '/slate-roof-replacement-cost'
+      path: '/slate-roof-replacement-cost'
+      fullPath: '/slate-roof-replacement-cost'
+      preLoaderRoute: typeof SlateRoofReplacementCostRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
       fullPath: '/terms'
       preLoaderRoute: typeof TermsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/terraced-house-roof-replacement-cost': {
+      id: '/terraced-house-roof-replacement-cost'
+      path: '/terraced-house-roof-replacement-cost'
+      fullPath: '/terraced-house-roof-replacement-cost'
+      preLoaderRoute: typeof TerracedHouseRoofReplacementCostRouteImport
       parentRoute: typeof rootRouteImport
     }
   }
@@ -239,13 +365,19 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AffiliateDisclosureRoute: AffiliateDisclosureRoute,
+  BungalowRoofReplacementCostRoute: BungalowRoofReplacementCostRoute,
+  ConcreteTileRoofReplacementCostRoute: ConcreteTileRoofReplacementCostRoute,
   ContactRoute: ContactRoute,
   FlatRoofCostRoute: FlatRoofCostRoute,
   NewRoofCostRoute: NewRoofCostRoute,
   PrivacyRoute: PrivacyRoute,
   RoofCostCalculatorRoute: RoofCostCalculatorRoute,
   RoofRepairCostRoute: RoofRepairCostRoute,
+  RoofReplacementCostPerM2Route: RoofReplacementCostPerM2Route,
+  SemiDetachedRoofReplacementCostRoute: SemiDetachedRoofReplacementCostRoute,
+  SlateRoofReplacementCostRoute: SlateRoofReplacementCostRoute,
   TermsRoute: TermsRoute,
+  TerracedHouseRoofReplacementCostRoute: TerracedHouseRoofReplacementCostRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

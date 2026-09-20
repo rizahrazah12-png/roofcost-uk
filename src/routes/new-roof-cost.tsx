@@ -6,6 +6,7 @@ import { SourcesBlock } from "@/components/SourcesBlock";
 import { Button } from "@/components/ui/button";
 import { isPartnerActive } from "@/config/partner";
 import { LAST_REVIEWED_LABEL } from "@/config/pricingData";
+import { replacementClusterPages } from "@/config/site";
 import { pageHead } from "@/lib/seo";
 
 export const Route = createFileRoute("/new-roof-cost")({
@@ -189,6 +190,25 @@ function NewRoofPage() {
         is not a quote for your house. Quotes for a pitched roof replacement
         need the property itself.
       </p>
+
+      <h2 className="mt-12 font-display text-2xl font-semibold">Explore roof replacement costs</h2>
+      <p className="mt-3">
+        This page is the overview. The guides below go into one question each —
+        a typical house type, a covering, or what a £/m² rate actually means.
+      </p>
+      <ul className="mt-4 grid gap-3 sm:grid-cols-2">
+        {replacementClusterPages.map((item) => (
+          <li key={item.path}>
+            <Link
+              to={item.path}
+              className="block rounded-lg border border-border bg-surface p-4 text-fg no-underline hover:border-primary"
+            >
+              <span className="font-semibold">{item.label}</span>
+              <span className="mt-1 block text-sm text-muted">{item.description}</span>
+            </Link>
+          </li>
+        ))}
+      </ul>
 
       <div className="mt-10">
         <PartnerLeadForm placement="guide" />
