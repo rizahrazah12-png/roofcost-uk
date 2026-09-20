@@ -1,18 +1,22 @@
 import { isPartnerActive, partnerConfig, showPartnerComingSoon } from "@/config/partner";
 import { track } from "@/lib/events";
-import { useEffect } from "react";
+import { loadPartnerWidget } from "@/lib/partnerWidget";
+import { Button } from "@/components/ui/button";
+import { useId, useRef, useState } from "react";
+
+type LoadState = "idle" | "loading" | "ready" | "error";
 
 export function PartnerLeadForm({ placement }: { placement: "result" | "guide" }) {
-  const active = isPartnerActive();
-  const pending = showPartnerComingSoon();
-
-  useEffect(() => {
-    if (active) track("partner_form_loaded", { placement });
-  }, [active, placement]);
+  const headingId = useId();
+  const statusId = useId();
+  const mountRef = useRef<HTMLDivElement>(null);
+  const startedRef = useRef(false);
+  const [state, setState] = useState<LoadState>("idle");
+  const [errorMessage, setErrorMessage] = useState("");
 
   if (partnerConfig.partnerStatus === "disabled") return null;
 
-  if (pending) {
+  if (showPartnerComingSoon()) {
     return (
       <aside
         className="rounded-lg border border-border bg-surface p-5"
@@ -31,19 +35,42 @@ export function PartnerLeadForm({ placement }: { placement: "result" | "guide" }
     );
   }
 
-  if (!active) return null;
+  if (!isPartnerActive()) return null;
 
-  function onCta() {
+  async function openWidget() {
+    if (startedRef.current || state === "loading" || state === "ready") return;
+    startedRef.current = true;
     track("quote_cta_clicked", { placement });
+    setErrorMessage("");
+    setState("loading");
+    const mount = mountRef.current;
+    if (!mount) {
+      startedRef.current = false;
+      setState("error");
+      setErrorMessage("The quote form could not be opened. Please try again.");
+      return;
+    }
+    try {
+      await loadPartnerWidget(mount);
+      track("partner_form_loaded", { placement });
+      setState("ready");
+      mount.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    } catch {
+      startedRef.current = false;
+      setState("error");
+      setErrorMessage(
+        "The quote form could not be loaded. Check your connection and try again.",
+      );
+    }
   }
 
   return (
     <aside
       id="quotes"
       className="rounded-lg border border-primary/30 bg-surface p-5"
-      aria-labelledby={`quotes-${placement}`}
+      aria-labelledby={headingId}
     >
-      <h2 id={`quotes-${placement}`} className="font-display text-lg font-semibold">
+      <h2 id={headingId} className="font-display text-lg font-semibold">
         Compare local roofing quotes
       </h2>
       <p className="mt-2 text-sm text-muted">
@@ -56,30 +83,52 @@ export function PartnerLeadForm({ placement }: { placement: "result" | "guide" }
         {partnerConfig.partnerPrivacyUrl ? (
           <>
             {" "}
-            Read the partner{" "}
-            <a href={partnerConfig.partnerPrivacyUrl} className="underline">
+            Read the {partnerConfig.partnerName}{" "}
+            <a
+              href={partnerConfig.partnerPrivacyUrl}
+              className="underline"
+              rel="noopener noreferrer"
+              target="_blank"
+            >
               privacy notice
             </a>
             .
           </>
         ) : null}
       </p>
-      {partnerConfig.partnerEmbedCode ? (
-        <div
-          className="mt-4"
-          onClick={onCta}
-          dangerouslySetInnerHTML={{ __html: partnerConfig.partnerEmbedCode }}
-        />
-      ) : partnerConfig.partnerTrackingUrl ? (
-        <a
-          href={partnerConfig.partnerTrackingUrl}
-          className="mt-4 inline-flex min-h-11 items-center rounded-md bg-primary px-4 font-semibold text-primary-fg no-underline"
-          onClick={onCta}
-          rel="noopener noreferrer"
-        >
-          Get roofing quotes
-        </a>
+
+      {state !== "ready" ? (
+        <div className="mt-4">
+          <Button
+            type="button"
+            onClick={() => void openWidget()}
+            disabled={state === "loading"}
+            aria-describedby={statusId}
+            aria-busy={state === "loading"}
+          >
+            {state === "loading" ? "Loading quote form…" : "Compare Roofing Quotes"}
+          </Button>
+        </div>
       ) : null}
+
+      <p id={statusId} className="mt-3 text-sm text-muted" role="status" aria-live="polite">
+        {state === "loading"
+          ? "Loading the quote comparison form. This stays on this page."
+          : null}
+        {state === "error" ? errorMessage : null}
+      </p>
+
+      {state === "error" ? (
+        <Button type="button" variant="secondary" className="mt-2" onClick={() => void openWidget()}>
+          Try again
+        </Button>
+      ) : null}
+
+      <div
+        ref={mountRef}
+        className="mt-4 w-full max-w-full overflow-x-auto [-webkit-overflow-scrolling:touch]"
+        style={{ maxWidth: partnerConfig.partnerWidgetMaxWidthPx }}
+      />
     </aside>
   );
 }

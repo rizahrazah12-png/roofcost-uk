@@ -41,7 +41,7 @@ function AboutPage() {
 
       <h2 className="mt-10 font-display text-2xl font-semibold">How the site may be funded</h2>
       <p className="mt-3">
-        The calculator and guides are free. RoofCost UK may later earn a
+        The calculator and guides are free. RoofCost UK may earn a
         commission if you choose to request quotes through an approved partner.
         That relationship does not change the calculator result. See the{" "}
         <Link to="/affiliate-disclosure" className="underline">

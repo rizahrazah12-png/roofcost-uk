@@ -1,6 +1,6 @@
 import { Link, createFileRoute } from "@tanstack/react-router";
 import { Breadcrumbs } from "@/components/Breadcrumbs";
-import { isPartnerActive } from "@/config/partner";
+import { isPartnerActive, partnerConfig } from "@/config/partner";
 import { siteConfig } from "@/config/site";
 import { pageHead } from "@/lib/seo";
 
@@ -34,8 +34,9 @@ function AffiliatePage() {
       </p>
       {active ? (
         <p className="mt-3">
-          Where a quote-request form is shown, a short commission disclosure also
-          appears next to it.
+          A quote-request partnership with {partnerConfig.partnerName} is now
+          active. Where that form is shown, a short commission disclosure
+          appears next to it. RoofCost UK does not publish commission amounts.
         </p>
       ) : (
         <p className="mt-3">
