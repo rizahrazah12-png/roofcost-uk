@@ -15,8 +15,10 @@ let scriptLoad: Promise<void> | null = null;
  *
  * Creates the Leads Do Work `<script>` with the DOM API (never React
  * innerHTML). Sets `window.id_conf` as the widget requires. The vendor file
- * calls `document.write` for `#f-content`; that is redirected into `mount`
+ * calls `document.write` for `#f-loader`; that is redirected into `mount`
  * so it cannot wipe the RoofCost UK page.
+ *
+ * The vendor script is injected once per browser session.
  */
 export function loadPartnerWidget(mount: HTMLElement): Promise<void> {
   const configId = partnerConfig.partnerWidgetConfigId;
@@ -30,9 +32,10 @@ export function loadPartnerWidget(mount: HTMLElement): Promise<void> {
 
   const w = window as PartnerWindow;
   w.id_conf = configId;
+  ensureShell(mount);
 
-  if (typeof w.startTheLoading === "function" && document.querySelector(`script[${SCRIPT_FLAG}]`)) {
-    ensureShell(mount);
+  const existing = document.querySelector(`script[${SCRIPT_FLAG}]`);
+  if (existing && typeof w.startTheLoading === "function") {
     w.startTheLoading();
     return waitForWidget(mount);
   }
@@ -44,13 +47,23 @@ export function loadPartnerWidget(mount: HTMLElement): Promise<void> {
 }
 
 function ensureShell(mount: HTMLElement) {
-  if (mount.querySelector("#f-content")) return;
+  if (!mount.querySelector("#f-content")) {
+    const content = document.createElement("div");
+    content.id = "f-content";
+    mount.appendChild(content);
+  }
   const orphan = document.getElementById("f-content");
-  if (orphan && !mount.contains(orphan)) orphan.remove();
+  if (orphan && !mount.contains(orphan) && orphan !== mount.querySelector("#f-content")) {
+    orphan.remove();
+  }
 }
 
 function injectVendorScript(mount: HTMLElement, scriptUrl: string): Promise<void> {
   return new Promise((resolve, reject) => {
+    if (document.querySelector(`script[${SCRIPT_FLAG}]`)) {
+      resolve();
+      return;
+    }
     const restore = patchDocumentWrite(mount);
     const script = document.createElement("script");
     script.setAttribute(SCRIPT_FLAG, "1");
@@ -72,6 +85,7 @@ function injectVendorScript(mount: HTMLElement, scriptUrl: string): Promise<void
       window.clearTimeout(timer);
       restore();
       scriptLoad = null;
+      script.remove();
       reject(new Error("The quote form could not be loaded."));
     };
     document.body.appendChild(script);
@@ -96,7 +110,7 @@ function waitForWidget(mount: HTMLElement): Promise<void> {
   return new Promise((resolve, reject) => {
     const started = Date.now();
     const tick = () => {
-      if (mount.querySelector("#f-content, #Qmain-section, form, input")) {
+      if (mount.querySelector("#f-content, #Qmain-section, #f-loader, form, input")) {
         resolve();
         return;
       }

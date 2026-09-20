@@ -1,14 +1,21 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouterState } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Logo } from "@/components/Logo";
 import { Button } from "@/components/ui/button";
 import { isPartnerActive } from "@/config/partner";
 import { navItems } from "@/config/site";
+import { requestQuoteForm } from "@/lib/quoteIntent";
 
 export function Header() {
   const [open, setOpen] = useState(false);
   const partner = isPartnerActive();
+  const pathname = useRouterState({ select: (s) => s.location.pathname });
+
+  function onQuoteClick() {
+    if (pathname === "/new-roof-cost") requestQuoteForm();
+    setOpen(false);
+  }
 
   return (
     <header className="sticky top-0 z-40 border-b border-border bg-surface/95 backdrop-blur-sm">
@@ -39,7 +46,12 @@ export function Header() {
         <div className="flex items-center gap-2">
           {partner ? (
             <Button asChild size="sm" className="hidden sm:inline-flex">
-              <Link to="/roof-cost-calculator" hash="quotes" className="no-underline text-primary-fg">
+              <Link
+                to="/new-roof-cost"
+                hash="quotes"
+                className="no-underline text-primary-fg"
+                onClick={onQuoteClick}
+              >
                 Compare Roofing Quotes
               </Link>
             </Button>
@@ -78,10 +90,10 @@ export function Header() {
             {partner ? (
               <li>
                 <Link
-                  to="/roof-cost-calculator"
+                  to="/new-roof-cost"
                   hash="quotes"
                   className="block rounded-md bg-primary px-3 py-3 text-center font-semibold text-primary-fg no-underline"
-                  onClick={() => setOpen(false)}
+                  onClick={onQuoteClick}
                 >
                   Compare Roofing Quotes
                 </Link>
